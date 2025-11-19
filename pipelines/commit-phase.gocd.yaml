@@ -1,0 +1,91 @@
+format_version: 10
+pipelines:
+  Build-Test-Report:
+    group: defaultGroup
+    label_template: ${COUNT}
+    lock_behavior: none
+    display_order: -1
+    timer:
+      spec: 0 30 10 * * ?
+      only_on_changes: false
+    materials:
+      git-46f3484:
+        git: https://github.com/toan-ship-it/go-api.git
+        username: toan
+        ignore:
+        - README.md
+        shallow_clone: false
+        auto_update: true
+        branch: main
+        encrypted_password: AES:yfl+xwkiz0b0ZWJMWaZMFA==:0yLp66+ld10CfypZenOC4YasUJ+8GTAJ4flSnCwQlILMqezO1niVhy1RQ4D9FK9l
+    stages:
+    - Build:
+        fetch_materials: true
+        keep_artifacts: false
+        clean_workspace: false
+        approval:
+          type: success
+          allow_only_on_success: false
+        jobs:
+          defaultJob:
+            timeout: 0
+            artifacts:
+            - build:
+                source: bin/app
+                destination: bin/app
+            tasks:
+            - exec:
+                arguments:
+                - mod
+                - download
+                command: go
+                run_if: passed
+            - exec:
+                arguments:
+                - build
+                - -o
+                - ./bin/app
+                - ./cmd/api/main.go
+                command: go
+                run_if: passed
+    - Unit-test:
+        fetch_materials: false
+        keep_artifacts: false
+        clean_workspace: false
+        approval:
+          type: success
+          allow_only_on_success: true
+        jobs:
+          defaultJob:
+            timeout: 0
+            tabs:
+              Coverage: coverage.html
+              Test-report: testoutput/test_report.xml
+            artifacts:
+            - build:
+                source: coverage.html
+                destination: ''
+            - test:
+                source: test_report.xml
+                destination: testoutput
+            tasks:
+            - exec:
+                arguments:
+                - -c
+                - go test -v -coverprofile=coverage.out 2>&1 ./... | go-junit-report
+                  -set-exit-code > test_report.xml
+                command: sh
+                run_if: passed
+            - exec:
+                arguments:
+                - -c
+                - go tool cover -html=coverage.out -o coverage.html
+                command: sh
+                run_if: passed
+            - exec:
+                command: ls
+                run_if: passed
+            - exec:
+                command: pwd
+                run_if: passed
+
