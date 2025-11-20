@@ -42,7 +42,7 @@ pipelines:
             timeout: 0
             artifacts:
             - build:
-                source: bin/app
+                source: app-source/bin/app
                 destination: bin/app
             tasks:
             - exec:
@@ -76,10 +76,10 @@ pipelines:
               Test-report: testoutput/test_report.xml
             artifacts:
             - build:
-                source: coverage.html
+                source: app-source/coverage.html
                 destination: ''
             - test:
-                source: test_report.xml
+                source: app-source/test_report.xml
                 destination: testoutput
             tasks:
             - exec:
