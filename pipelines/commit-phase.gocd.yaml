@@ -98,7 +98,9 @@ pipelines:
                 run_if: passed
                 working_directory: app-source
             - exec:
-                command: ls ..
+                command: ls
+                arguments:
+                - ..
             - exec:
                 command: pwd
             - exec:
