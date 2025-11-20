@@ -51,6 +51,7 @@ pipelines:
                 - download
                 command: go
                 run_if: passed
+                working_directory: app-source
             - exec:
                 arguments:
                 - build
@@ -59,6 +60,7 @@ pipelines:
                 - ./cmd/api/main.go
                 command: go
                 run_if: passed
+                working_directory: app-source
     - Unit-test:
         fetch_materials: false
         keep_artifacts: false
@@ -87,18 +89,20 @@ pipelines:
                   -set-exit-code > test_report.xml
                 command: sh
                 run_if: passed
+                working_directory: app-source
             - exec:
                 arguments:
                 - -c
                 - go tool cover -html=coverage.out -o coverage.html
                 command: sh
                 run_if: passed
+                working_directory: app-source
             - exec:
-                working_directory: gocd-pipeline
                 arguments:
                 - ./scripts/commit/coverage_threshold.sh
                 command: sh
                 run_if: passed
+                working_directory: pipeline
 
             - exec:
                 command: ls
