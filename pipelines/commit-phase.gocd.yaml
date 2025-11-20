@@ -83,6 +83,13 @@ pipelines:
                 command: sh
                 run_if: passed
             - exec:
+                working_directory: gocd-pipeline
+                arguments:
+                - ./scripts/commit/coverage_threshold.sh
+                command: sh
+                run_if: passed
+
+            - exec:
                 command: ls
                 run_if: passed
             - exec:
