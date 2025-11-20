@@ -20,7 +20,7 @@ pipelines:
         encrypted_password: AES:yfl+xwkiz0b0ZWJMWaZMFA==:0yLp66+ld10CfypZenOC4YasUJ+8GTAJ4flSnCwQlILMqezO1niVhy1RQ4D9FK9l
         destination: app-source
       pipeline-repo:
-        git: https://github.com/toan-ship-it/go-api.git
+        git: https://github.com/toan-ship-it/gocd-pipeline.git
         username: toan
         ignore:
         - README.md
