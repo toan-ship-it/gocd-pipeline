@@ -18,6 +18,7 @@ pipelines:
         auto_update: true
         branch: main
         encrypted_password: AES:yfl+xwkiz0b0ZWJMWaZMFA==:0yLp66+ld10CfypZenOC4YasUJ+8GTAJ4flSnCwQlILMqezO1niVhy1RQ4D9FK9l
+        destination: app-source
       pipeline-repo:
         git: https://github.com/toan-ship-it/go-api.git
         username: toan
@@ -27,6 +28,7 @@ pipelines:
         auto_update: true
         branch: main
         encrypted_password: AES:xYCp4yxJ8uFDE1lvxKgHdg==:6PQkqIcnKsOvPbRvzLTP38ZSkuSSeple4GeV6OPxxesB5IK/a8dVU3jvRhwaKe+c
+        destination: pipeline
     stages:
     - Build:
         fetch_materials: true
