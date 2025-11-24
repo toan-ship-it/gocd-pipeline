@@ -135,6 +135,10 @@ pipelines:
                   command: ls
                   run_if: passed
                   working_directory: app-source
+              - exec:
+                command: pwd
+                run_if: passed
+
 
 
 
