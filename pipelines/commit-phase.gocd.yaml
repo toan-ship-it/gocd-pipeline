@@ -25,7 +25,7 @@ pipelines:
         ignore:
         - README.md
         shallow_clone: false
-        auto_update: true
+        auto_update: false # pipeline not run when update pipeline definition repo
         branch: main
         encrypted_password: AES:xYCp4yxJ8uFDE1lvxKgHdg==:6PQkqIcnKsOvPbRvzLTP38ZSkuSSeple4GeV6OPxxesB5IK/a8dVU3jvRhwaKe+c
         destination: pipeline
@@ -131,7 +131,7 @@ pipelines:
             tasks:
               - exec:
                   arguments:
-                  - .
+                  - . && ls ..
                   command: ls
                   run_if: passed
                   working_directory: app-source
