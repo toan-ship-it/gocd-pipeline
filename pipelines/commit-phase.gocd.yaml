@@ -105,10 +105,10 @@ pipelines:
                 command: pwd
             - exec:
                 arguments:
-                - scripts/commit/coverage_threshold.sh
+                - ../pipeline/scripts/commit/coverage_threshold.sh
                 command: sh
                 run_if: passed
-                working_directory: pipeline
+                working_directory: app-source
 
             - exec:
                 command: ls
