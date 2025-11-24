@@ -131,7 +131,7 @@ pipelines:
             tasks:
               - exec:
                   arguments:
-                  - . && ls ..
+                  - */*/
                   command: ls
                   run_if: passed
                   working_directory: app-source
