@@ -6,4 +6,5 @@ then
 	echo "Coverage $COVERAGE% is below threshold $COVERAGE_THRESHOLD%"
 	exit 1
 else
-	echo "Coverage $COVERAGE% meets threshold" fi
+	echo "Coverage $COVERAGE% meets threshold" 
+fi
