@@ -50,6 +50,7 @@ pipelines:
                 - deps
                 command: make
                 run_if: passed
+                working_directory: app-source
             - exec:
                 arguments:
                 - build
@@ -84,11 +85,13 @@ pipelines:
                 - test
                 command: make
                 run_if: passed
+                working_directory: app-source
             - exec:
                 arguments:
                 - coverage
                 command: make
                 run_if: passed
+                working_directory: app-source
             - exec:
                 command: ls
                 arguments:
@@ -100,6 +103,7 @@ pipelines:
                 - check-threshold
                 command: make
                 run_if: passed
+                working_directory: app-source
             - exec:
                 command: ls
                 run_if: passed
