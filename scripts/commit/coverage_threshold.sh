@@ -1,3 +1,5 @@
+#!/bin/bash
+
 COVERAGE=$(go tool cover -func=coverage.out | grep total | awk '{print $3}' | sed 's/%//')
 echo "Quality Gate: checking test coverage is above threshold ..."
 echo "Threshold                 : $COVERAGE_THRESHOLD %"
