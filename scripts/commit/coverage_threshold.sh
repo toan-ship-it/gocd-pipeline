@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 COVERAGE_FILE=$1
 COVERAGE_THRESHOLD=$2
