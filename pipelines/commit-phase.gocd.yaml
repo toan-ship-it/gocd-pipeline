@@ -43,7 +43,7 @@ pipelines:
             artifacts:
             - build:
                 source: app-source/bin/go-api-app
-                destination: bin/go-api-app
+                destination: bin
             tasks:
             - exec:
                 arguments:
