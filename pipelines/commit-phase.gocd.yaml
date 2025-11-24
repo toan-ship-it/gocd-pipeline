@@ -47,18 +47,13 @@ pipelines:
             tasks:
             - exec:
                 arguments:
-                - mod
-                - download
-                command: go
+                - deps
+                command: make
                 run_if: passed
-                working_directory: app-source
             - exec:
                 arguments:
                 - build
-                - -o
-                - ./bin/app
-                - ./cmd/api/main.go
-                command: go
+                command: make
                 run_if: passed
                 working_directory: app-source
     - Unit-test:
@@ -70,7 +65,7 @@ pipelines:
           allow_only_on_success: true
         jobs:
           defaultJob:
-            environment_variables: 
+            environment_variables:
               COVERAGE_THRESHOLD: 40
             timeout: 0
             tabs:
@@ -86,19 +81,14 @@ pipelines:
             tasks:
             - exec:
                 arguments:
-                - -c
-                - go test -v -coverprofile=coverage.out 2>&1 ./... | go-junit-report
-                  -set-exit-code > test_report.xml
-                command: sh
+                - test
+                command: make
                 run_if: passed
-                working_directory: app-source
             - exec:
                 arguments:
-                - -c
-                - go tool cover -html=coverage.out -o coverage.html
-                command: sh
+                - coverage
+                command: make
                 run_if: passed
-                working_directory: app-source
             - exec:
                 command: ls
                 arguments:
@@ -107,11 +97,9 @@ pipelines:
                 command: pwd
             - exec:
                 arguments:
-                - ../pipeline/scripts/commit/coverage_threshold.sh
-                command: sh
+                - check-threshold
+                command: make
                 run_if: passed
-                working_directory: app-source
-
             - exec:
                 command: ls
                 run_if: passed
@@ -138,8 +126,3 @@ pipelines:
               - exec:
                   command: pwd
                   run_if: passed
-
-
-
-
-
