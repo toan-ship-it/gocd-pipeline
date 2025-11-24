@@ -128,5 +128,8 @@ pipelines:
                   run_if: passed
                   working_directory: app-source
               - exec:
-                  command: pwd
+                  arguments:
+                  - build-image
+                  command: make
                   run_if: passed
+                  working_directory: app-source
