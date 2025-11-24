@@ -1,4 +1,4 @@
-COVERAGE=$(go tool cover -func=../app-source/coverage.out | grep total | awk '{print $3}' | sed 's/%//')
+COVERAGE=$(go tool cover -func=../../../app-source/coverage.out | grep total | awk '{print $3}' | sed 's/%//')
 echo "Quality Gate: checking test coverage is above threshold ..."
 echo "Threshold                 : $COVERAGE_THRESHOLD %"
 if (( $(echo "$COVERAGE < $COVERAGE_THRESHOLD" | bc -l) ))
