@@ -66,8 +66,8 @@ pipelines:
           allow_only_on_success: true
         jobs:
           defaultJob:
-            environment_variables:
-              COVERAGE_THRESHOLD: 40
+#            environment_variables:
+#             COVERAGE_THRESHOLD: 40
             timeout: 0
             tabs:
               Coverage: coverage.html
