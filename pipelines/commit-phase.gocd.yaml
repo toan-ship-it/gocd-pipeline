@@ -42,8 +42,8 @@ pipelines:
             timeout: 0
             artifacts:
             - build:
-                source: app-source/bin/app
-                destination: bin/app
+                source: app-source/bin/go-api-app
+                destination: bin/go-api-app
             tasks:
             - exec:
                 arguments:
