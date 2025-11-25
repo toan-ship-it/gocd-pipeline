@@ -39,6 +39,15 @@ pipelines:
           type: success
           allow_only_on_success: false
         jobs:
+          listEnv:
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                  - -c
+                  - env | grep GO_
+                command: bash
+                run_if: passed
           defaultJob:
             timeout: 0
             artifacts:
