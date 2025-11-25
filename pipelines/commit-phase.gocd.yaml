@@ -10,7 +10,6 @@ pipelines:
       only_on_changes: false
     materials:
       git-46f3484:
-        materialName: appsource
         git: https://github.com/toan-ship-it/go-api.git
         username: toan
         ignore:
@@ -45,7 +44,7 @@ pipelines:
             - exec:
                 arguments:
                   - -c
-                  - env | grep GO_
+                  - env | grep  -E '^(GO_|DOCKER)'
                 command: bash
                 run_if: passed
           defaultJob:
@@ -130,6 +129,14 @@ pipelines:
         jobs:
           defaultJob:
             timeout: 0
+            artifacts:
+            - external: 
+                id: go-api-app
+                store_id: DockerHub
+                configuration:
+                  options:
+                    Image: ${DOCKERHUB_USERNAME}/go-api-app
+                    Tag: ${GO_PIPELINE_COUNTER}-${GO_REVISION_GIT_46F3484}
             tasks:
               - exec:
                   arguments:
