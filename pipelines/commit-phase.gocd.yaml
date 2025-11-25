@@ -128,6 +128,8 @@ pipelines:
           allow_only_on_success: true
         jobs:
           defaultJob:
+            environment_variables:
+              DOCKERHUB_USERNAME: toanshipit
             timeout: 0
             artifacts:
             - external: 
