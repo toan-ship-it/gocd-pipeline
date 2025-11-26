@@ -20,7 +20,7 @@ pipelines:
         ignore:
         - README.md
         shallow_clone: false
-        auto_update: true
+        auto_update: false
         branch: main
         encrypted_password: AES:yfl+xwkiz0b0ZWJMWaZMFA==:0yLp66+ld10CfypZenOC4YasUJ+8GTAJ4flSnCwQlILMqezO1niVhy1RQ4D9FK9l
         destination: app-source
