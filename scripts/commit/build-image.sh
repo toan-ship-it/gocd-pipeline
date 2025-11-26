@@ -2,8 +2,8 @@
 set -e
 
 # --- Check arguments ---
-if [ $# -ne 4 ]; then
-    echo "Usage: $0 <pipeline_counter> <revision> <docker_username> <app_name>"
+if [ $# -ne 3 ]; then
+    echo "Usage: $0 <revision> <docker_username> <app_name>"
     exit 1
 fi
 
