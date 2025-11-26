@@ -148,7 +148,7 @@ pipelines:
                 configuration:
                   options:
                     Image: ${DOCKERHUB_USERNAME}/${APP_NAME}
-                    Tag: ${GO_REVISION_GIT_46F3484}
+                    Tag: ${GO_PIPELINE_COUNTER}-${GO_REVISION_GIT_46F3484}
             tasks:
               - exec:
                   arguments:
