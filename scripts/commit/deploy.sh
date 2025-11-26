@@ -23,7 +23,8 @@ echo "Namespace: ${NAMESPACE}"
 helm upgrade --install "${RELEASE_NAME}" "${HELM_CHART_DIR}" \
   -n "${NAMESPACE}" --create-namespace \
 #  ${VALUES_ARGS} \
-  --set image.tag="${IMAGE_TAG}"
+  --set image.tag="${IMAGE_TAG}" \
+  --set image.repository="${DOCKERHUB_USERNAME}/${APP_NAME}"
 
 echo "Deployment completed with tag: ${IMAGE_TAG}"
 

@@ -7,9 +7,9 @@ if [ $# -ne 4 ]; then
     exit 1
 fi
 
-REVISION=$2
-USERNAME=$3
-APP_NAME=$4
+REVISION=$1
+USERNAME=$2
+APP_NAME=$3
 
 # --- Compute Docker tag ---
 TAG="${REVISION}"
