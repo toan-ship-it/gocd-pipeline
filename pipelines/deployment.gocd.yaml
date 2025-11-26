@@ -20,7 +20,7 @@ pipelines:
         ignore:
         - README.md
         shallow_clone: false
-        auto_update: false
+        auto_update: true
         branch: main
         encrypted_password: AES:yfl+xwkiz0b0ZWJMWaZMFA==:0yLp66+ld10CfypZenOC4YasUJ+8GTAJ4flSnCwQlILMqezO1niVhy1RQ4D9FK9l
         destination: app-source
@@ -40,7 +40,7 @@ pipelines:
         keep_artifact: false
         clean_workspace: true
         approval:
-          type: success
+          type: manual
           allow_only_on_success: true
         jobs:
           deploy_app:
