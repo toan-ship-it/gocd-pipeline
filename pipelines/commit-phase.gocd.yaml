@@ -4,6 +4,10 @@ environments:
     environment_variables:
       DOCKERHUB_USERNAME: toanshipit
       APP_NAME: go-api-app
+    pipelines:
+    - Build-Test-Report
+    agents:
+    - e8cb7d6d-54e7-4b93-9278-d92d0f8eb8eb
 pipelines:
   Build-Test-Report:
     group: defaultGroup
