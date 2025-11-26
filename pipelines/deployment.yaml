@@ -1,0 +1,51 @@
+format_version: 10
+environments:
+  Test-pipelines:
+    pipelines:
+    - Deploy
+pipelines:
+  Deploy:
+    group: defaultGroup
+    label_template: ${COUNT}
+    lock_behavior: none
+    display_order: -1    
+    materials:
+      BuildTestReport:
+        pipeline: Build-Test-Report
+        stage: Build-image
+        ignore_for_scheduling: false
+      git-46f3484:
+        git: https://github.com/toan-ship-it/go-api.git
+        username: toan
+        ignore:
+        - README.md
+        shallow_clone: false
+        auto_update: true
+        branch: main
+        encrypted_password: AES:yfl+xwkiz0b0ZWJMWaZMFA==:0yLp66+ld10CfypZenOC4YasUJ+8GTAJ4flSnCwQlILMqezO1niVhy1RQ4D9FK9l
+        destination: app-source
+      pipeline-repo:
+        git: https://github.com/toan-ship-it/gocd-pipeline.git
+        username: toan
+        ignore:
+        - README.md
+        shallow_clone: false
+        auto_update: false # pipeline not run when update pipeline definition repo
+        branch: main
+        encrypted_password: AES:xYCp4yxJ8uFDE1lvxKgHdg==:6PQkqIcnKsOvPbRvzLTP38ZSkuSSeple4GeV6OPxxesB5IK/a8dVU3jvRhwaKe+c
+        destination: pipeline
+    stages:
+    - Deploy:
+        jobs:
+          deploy_app:
+            tasks:
+            # Task để chạy lệnh 'make deploy'
+            - exec:
+                command: make
+                arguments:
+                - deploy
+            - exec:
+                command: make
+                arguments:
+                - test-connection
+                working_directory: app-source
