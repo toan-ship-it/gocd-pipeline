@@ -36,6 +36,12 @@ pipelines:
         destination: pipeline
     stages:
     - Deploy:
+        fetch_materials: true
+        keep_artifact: false
+        clean_workspace: true
+        approval:
+          type: success
+          allow_only_on_success: true
         jobs:
           deploy_app:
             tasks:
