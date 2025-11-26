@@ -13,7 +13,7 @@ pipelines:
       BuildTestReport:
         pipeline: Build-Test-Report
         stage: Build-image
-        ignore_for_scheduling: false
+        ignore_for_scheduling: true
       git-46f3484:
         git: https://github.com/toan-ship-it/go-api.git
         username: toan
