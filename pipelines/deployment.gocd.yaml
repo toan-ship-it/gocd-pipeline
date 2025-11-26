@@ -49,9 +49,10 @@ pipelines:
             - exec:
                 command: make
                 arguments:
-                - deploy
-            - exec:
-                command: make
-                arguments:
-                - test-connection
                 working_directory: app-source
+                - deploy
+                  #            - exec:
+                  # command: make
+                  #arguments:
+                  #- test-connection
+                  #working_directory: app-source
