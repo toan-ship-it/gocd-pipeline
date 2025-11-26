@@ -49,11 +49,10 @@ pipelines:
             - exec:
                 command: make
                 arguments:
+                - deploy
                 working_directory: app-source
                 run_if: passed
-                - deploy
-                  #            - exec:
-                  # command: make
-                  #arguments:
-                  #- test-connection
-                  #working_directory: app-source
+            - exec:
+                command: ls
+                arguments:
+                - .
