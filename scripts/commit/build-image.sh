@@ -7,15 +7,13 @@ if [ $# -ne 4 ]; then
     exit 1
 fi
 
-PIPELINE_COUNTER=$1
 REVISION=$2
 USERNAME=$3
 APP_NAME=$4
 
 # --- Compute Docker tag ---
-TAG="${PIPELINE_COUNTER}-${REVISION}"
+TAG="${REVISION}"
 
-echo "Pipeline counter: $PIPELINE_COUNTER"
 echo "Git revision: $REVISION"
 echo "Docker username: $USERNAME"
 echo "App name: $APP_NAME"
