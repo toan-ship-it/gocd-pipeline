@@ -6,7 +6,8 @@ environments:
       APP_NAME: go-api-app
     pipelines:
     - Build-Test-Report
-    - Deploy
+    agents:
+    - DESKTOP-E2OJ4UB
 pipelines:
   Build-Test-Report:
     group: defaultGroup
