@@ -2,7 +2,7 @@
 set -e
 
 # --- Variables from GoCD environment ---
-HELM_CHART_DIR="../../helm-chart/${APP_NAME}" # path đến chart
+HELM_CHART_DIR="../../pipeline/helm-chart/${APP_NAME}" # path đến chart
 BUILD_COUNT=${GO_DEPENDENCY_LABEL_BUILDTESTREPORT}
 REVISION=${GO_REVISION_GIT_46F3484}
 
