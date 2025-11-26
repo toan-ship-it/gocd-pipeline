@@ -2,16 +2,17 @@
 set -e
 
 # --- Variables from GoCD environment ---
-HELM_CHART_DIR="./helm-chart/${APP_NAME}"   # path đến chart
+HELM_CHART_DIR="../../helm-chart/${APP_NAME}" # path đến chart
+BUILD_COUNT=${GO_DEPENDENCY_LABEL_BUILDTESTREPORT}
 REVISION=${GO_REVISION_GIT_46F3484}
 
 # --- Compute image tag ---
-IMAGE_TAG="${REVISION}"
+IMAGE_TAG="${BUILD_COUNT}-${REVISION}"
 echo "Using image tag: ${IMAGE_TAG}"
 
 # --- Release and namespace ---
-RELEASE_NAME="preview-deploy-${REVISION}"
-NAMESPACE="preview-deploy-${REVISION}"
+RELEASE_NAME="preview-deploy"
+NAMESPACE="preview-deploy"
 
 echo "Release: ${RELEASE_NAME}"
 echo "Namespace: ${NAMESPACE}"

@@ -2,18 +2,20 @@
 set -e
 
 # --- Check arguments ---
-if [ $# -ne 3 ]; then
-    echo "Usage: $0 <revision> <docker_username> <app_name>"
+if [ $# -ne 4 ]; then
+    echo "Usage: $0 <build_pipeline_count> <revision> <docker_username> <app_name>"
     exit 1
 fi
 
-REVISION=$1
-USERNAME=$2
-APP_NAME=$3
+BUILD_COUNT=$1
+REVISION=$2
+USERNAME=$3
+APP_NAME=$4
 
 # --- Compute Docker tag ---
-TAG="${REVISION}"
+TAG="${BUILD_COUNT}-${REVISION}"
 
+echo "Build count: $BUILD_COUNT"
 echo "Git revision: $REVISION"
 echo "Docker username: $USERNAME"
 echo "App name: $APP_NAME"

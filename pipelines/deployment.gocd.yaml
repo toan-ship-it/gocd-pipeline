@@ -50,6 +50,7 @@ pipelines:
                 command: make
                 arguments:
                 working_directory: app-source
+                run_if: passed
                 - deploy
                   #            - exec:
                   # command: make
