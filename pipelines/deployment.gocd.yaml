@@ -28,9 +28,9 @@ pipelines:
         git: https://github.com/toan-ship-it/gocd-pipeline.git
         username: toan
         ignore:
-        - README.md
+        - "*"
         shallow_clone: false
-        auto_update: false # pipeline not run when update pipeline definition repo
+        auto_update: true
         branch: main
         encrypted_password: AES:xYCp4yxJ8uFDE1lvxKgHdg==:6PQkqIcnKsOvPbRvzLTP38ZSkuSSeple4GeV6OPxxesB5IK/a8dVU3jvRhwaKe+c
         destination: pipeline
