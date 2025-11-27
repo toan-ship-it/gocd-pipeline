@@ -27,9 +27,8 @@ pipelines:
       pipeline-repo:
         git: https://github.com/toan-ship-it/gocd-pipeline.git
         username: toan
-        ignore:
-        - '*'
-        - '**'
+        include:
+        - 'dummy-file-to-prevent-triggering'
         shallow_clone: false
         auto_update: true
         branch: main

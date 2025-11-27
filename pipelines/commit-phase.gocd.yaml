@@ -31,9 +31,10 @@ pipelines:
       pipeline-repo:
         git: https://github.com/toan-ship-it/gocd-pipeline.git
         username: toan
-        ignore:
-        - '*'
-        - '**'
+        # ignore:
+        # - README.md
+        include:
+        - 'dummy-file-to-prevent-triggering' # only trigger when this file is changed, but this file not exist, so never triggered by the config repo changes
         shallow_clone: false
         auto_update: true # false to pipeline not run when update pipeline definition repo
         branch: main
