@@ -23,7 +23,6 @@ echo "Namespace: ${NAMESPACE}"
 # --- Helm upgrade/install ---
 helm upgrade --install "${RELEASE_NAME}" "${HELM_CHART_DIR}" \
   -n "${NAMESPACE}" --create-namespace \
-  -f env.values.yaml \
   --set mongo.uri="mongodb://127.0.0.1:27017" \
   --set image.tag="${IMAGE_TAG}" \
   --set image.repository="${DOCKERHUB_USERNAME}/${APP_NAME}"
