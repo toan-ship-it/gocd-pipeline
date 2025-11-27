@@ -22,8 +22,8 @@ pipelines:
         git: https://github.com/toan-ship-it/go-api.git
         username: toan
         ignore:
-        - '*'
-        - '**'
+        - './*'
+        - './**'
         shallow_clone: false
         auto_update: true
         branch: main
