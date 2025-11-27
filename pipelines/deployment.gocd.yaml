@@ -27,8 +27,8 @@ pipelines:
       pipeline-repo:
         git: https://github.com/toan-ship-it/gocd-pipeline.git
         username: toan
-        include:
-        - 'dummy-file-to-prevent-triggering'
+        includes:
+        - dummy-file-to-prevent-triggering.txt
         shallow_clone: false
         auto_update: true
         branch: main
