@@ -22,8 +22,7 @@ pipelines:
         git: https://github.com/toan-ship-it/go-api.git
         username: toan
         ignore:
-        - './*'
-        - './**'
+        - README.md
         shallow_clone: false
         auto_update: true
         branch: main
@@ -33,7 +32,8 @@ pipelines:
         git: https://github.com/toan-ship-it/gocd-pipeline.git
         username: toan
         ignore:
-        - "*"
+        - './*'
+        - './**'
         shallow_clone: false
         auto_update: true # false to pipeline not run when update pipeline definition repo
         branch: main
