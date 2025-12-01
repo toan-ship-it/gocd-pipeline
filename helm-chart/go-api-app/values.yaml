@@ -130,13 +130,13 @@ resources: {}
 # for container
 livenessProbe:
   httpGet:
-    path: /api/bookmarks
+    path: /health
     port: 8000
   initialDelaySeconds: 5
   periodSeconds: 5
 readinessProbe:
   httpGet:
-    path: /api/bookmarks
+    path: /health
     port: 8000
   initialDelaySeconds: 5
   periodSeconds: 5
