@@ -132,10 +132,14 @@ livenessProbe:
   httpGet:
     path: /api/bookmarks
     port: 8000
+  initialDelaySeconds: 5
+  periodSeconds: 5
 readinessProbe:
   httpGet:
     path: /api/bookmarks
     port: 8000
+  initialDelaySeconds: 5
+  periodSeconds: 5
 # This section is for setting up autoscaling more information can be found here: https://kubernetes.io/docs/concepts/workloads/autoscaling/
 autoscaling:
   enabled: false
