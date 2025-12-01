@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: {{ include "go-api-app.fullname" . }}-config
 data:
-  PORT: "{{ .Values.app.port }}"
+  APP_PORT: "{{ .Values.app.port }}"
   MONGO_URI: "{{ .Values.mongo.uri }}"
   MONGO_NAME: "{{ .Values.mongo.name }}"
   MONGO_USER_COLLECTION: "{{ .Values.mongo.user_collection }}"
