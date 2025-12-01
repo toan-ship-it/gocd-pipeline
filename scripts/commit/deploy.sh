@@ -5,7 +5,7 @@ set -e
 HELM_CHART_DIR="../pipeline/helm-chart/${APP_NAME}" # path đến chart
 BUILD_COUNT=${GO_DEPENDENCY_LABEL_BUILDTESTREPORT}
 REVISION=${GO_REVISION_GIT_46F3484}
-DB_HOST="172.19.80.1"
+DB_HOST="172.19.93.189"
 DB_PORT="27017"
 
 # --- Compute image tag ---
