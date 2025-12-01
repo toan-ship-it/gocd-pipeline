@@ -45,49 +45,11 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
-              env:
-                - name: PORT
-                  valueFrom:
-                    configMapKeyRef:
-                      name: {{ include "go-api-app.fullname" . }}-config
-                      key: PORT
-                - name: MONGO_URI
-                  valueFrom:
-                    configMapKeyRef:
-                      name: {{ include "go-api-app.fullname" . }}-config
-                      key: MONGO_URI
-                - name: MONGO_NAME
-                  valueFrom:
-                    configMapKeyRef:
-                      name: {{ include "go-api-app.fullname" . }}-config
-                      key: MONGO_NAME
-                - name: MONGO_USER_COLLECTION
-                  valueFrom:
-                    configMapKeyRef:
-                      name: {{ include "go-api-app.fullname" . }}-config
-                      key: MONGO_USER_COLLECTION
-                - name: MONGO_BOOKMARK_COLLECTION
-                  valueFrom:
-                    configMapKeyRef:
-                      name: {{ include "go-api-app.fullname" . }}-config
-                      key: MONGO_BOOKMARK_COLLECTION
-                - name: AUTH_TOKEN_TTL
-                  valueFrom:
-                    configMapKeyRef:
-                      name: {{ include "go-api-app.fullname" . }}-config
-                      key: AUTH_TOKEN_TTL
-
-              # Secret variables
-                - name: AUTH_HASH_SALT
-                  valueFrom:
-                    secretKeyRef:
-                      name: {{ include "go-api-app.fullname" . }}-auth
-                      key: AUTH_HASH_SALT
-                - name: AUTH_SIGNING_KEY
-                  valueFrom:
-                    secretKeyRef:
-                      name: {{ include "go-api-app.fullname" . }}-auth
-                      key: AUTH_SIGNING_KEY
+          envFrom:
+            - configMapRef:
+                name: {{ include "go-api-app.fullname" . }}-config
+            - secretRef:
+                name: {{ include "go-api-app.fullname" . }}-auth
           {{- with .Values.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}
