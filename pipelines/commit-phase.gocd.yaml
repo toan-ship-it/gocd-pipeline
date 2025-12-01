@@ -5,9 +5,9 @@ environments:
       DOCKERHUB_USERNAME: toanshipit
       APP_NAME: go-api-app
     pipelines:
-    - Build-Test-Report
+      - Build-Test-Report
     agents:
-    - e8cb7d6d-54e7-4b93-9278-d92d0f8eb8eb
+      - e8cb7d6d-54e7-4b93-9278-d92d0f8eb8eb
 pipelines:
   Build-Test-Report:
     group: defaultGroup
@@ -22,7 +22,7 @@ pipelines:
         git: https://github.com/toan-ship-it/go-api.git
         username: toan
         ignore:
-        - README.md
+          - README.md
         shallow_clone: false
         auto_update: true
         branch: main
@@ -34,150 +34,150 @@ pipelines:
         # ignore:
         # - README.md
         includes:
-        - dummy-file-to-prevent-triggering.txt # only trigger when this file is changed, but this file not exist, so never triggered by the config repo changes
+          - dummy-file-to-prevent-triggering.txt # only trigger when this file is changed, but this file not exist, so never triggered by the config repo changes
         shallow_clone: false
         auto_update: true # false to pipeline not run when update pipeline definition repo
         branch: main
         encrypted_password: AES:xYCp4yxJ8uFDE1lvxKgHdg==:6PQkqIcnKsOvPbRvzLTP38ZSkuSSeple4GeV6OPxxesB5IK/a8dVU3jvRhwaKe+c
         destination: pipeline
     stages:
-    - Build:
-        fetch_materials: true
-        keep_artifacts: false
-        clean_workspace: true
-        approval:
-          type: success
-          allow_only_on_success: false
-        jobs:
-          listEnv:
-            timeout: 0
-            tasks:
-            - exec:
-                arguments:
-                  - -c
-                  - env | grep  -E '^(GO_|DOCKER)'
-                command: bash
-                run_if: passed
-          defaultJob:
-            timeout: 0
-            artifacts:
-            - build:
-                source: app-source/bin/go-api-app
-                destination: bin
-            tasks:
-            - exec:
-                arguments:
-                - deps
-                command: make
-                run_if: passed
-                working_directory: app-source
-            - exec:
-                arguments:
-                - build
-                command: make
-                run_if: passed
-                working_directory: app-source
-    - Unit-test:
-        fetch_materials: false
-        keep_artifacts: false
-        clean_workspace: false
-        approval:
-          type: success
-          allow_only_on_success: true
-        jobs:
-          defaultJob:
-#            environment_variables:
-#             COVERAGE_THRESHOLD: 40
-            timeout: 0
-            tabs:
-              Coverage: coverage.html
-              Test-report: testoutput/test_report.xml
-            artifacts:
-            - build:
-                source: app-source/coverage.html
-                destination: ''
-            - test:
-                source: app-source/test_report.xml
-                destination: testoutput
-            tasks:
-            - exec:
-                arguments:
-                - test
-                command: make
-                run_if: passed
-                working_directory: app-source
-            - exec:
-                arguments:
-                - coverage
-                command: make
-                run_if: passed
-                working_directory: app-source
-            - exec:
-                command: ls
-                arguments:
-                - ..
-            - exec:
-                command: pwd
-            - exec:
-                arguments:
-                - check-threshold
-                command: make
-                run_if: passed
-                working_directory: app-source
-            - exec:
-                command: ls
-                run_if: passed
-            - exec:
-                command: pwd
-                run_if: passed
-    - Build-image:
-        fetch_materials: false
-        keep_artifacts: false
-        clean_workspace: false
-        approval:
-          type: success
-          allow_only_on_success: true
-        jobs:
-          defaultJob:
-         # environment_variables:
-            # DOCKERHUB_USERNAME: toanshipit
-            # APP_NAME: go-api-app
-            timeout: 0
-            artifacts:
-            - external: 
-                id: go-api-app
-                store_id: DockerHub
-                configuration:
-                  options:
-                    Image: ${DOCKERHUB_USERNAME}/${APP_NAME}
-                    Tag: ${GO_PIPELINE_COUNTER}-${GO_REVISION_GIT_46F3484}
-            tasks:
-              - exec:
-                  arguments:
-                  - .
-                  command: ls
-                  run_if: passed
-                  working_directory: app-source
-              - exec:
-                  arguments:
-                  - build-image
-                  command: make
-                  run_if: passed
-                  working_directory: app-source
-    - Clean-up:
-        fetch_materials: false
-        keep_artifacts: false
-        clean_workspace: true
-        approval:
-          type: success
-          allow_only_on_success: true
-        jobs:
-          defaultJob:
-            timeout: 0
-            tasks:
-            - exec:
-                arguments:
-                - cleanup
-                command: make
-                run_if: passed
-                working_directory: app-source
+      - Build:
+          fetch_materials: true
+          keep_artifacts: false
+          clean_workspace: true
+          approval:
+            type: success
+            allow_only_on_success: false
+          jobs:
+            listEnv:
+              timeout: 0
+              tasks:
+                - exec:
+                    arguments:
+                      - -c
+                      - env | grep  -E '^(GO_|DOCKER)'
+                    command: bash
+                    run_if: passed
+            defaultJob:
+              timeout: 0
+              artifacts:
+                - build:
+                    source: app-source/bin/go-api-app
+                    destination: bin
+              tasks:
+                - exec:
+                    arguments:
+                      - deps
+                    command: make
+                    run_if: passed
+                    working_directory: app-source
+                - exec:
+                    arguments:
+                      - build
+                    command: make
+                    run_if: passed
+                    working_directory: app-source
+      - Unit-test:
+          fetch_materials: false
+          keep_artifacts: false
+          clean_workspace: false
+          approval:
+            type: success
+            allow_only_on_success: true
+          jobs:
+            defaultJob:
+              #            environment_variables:
+              #             COVERAGE_THRESHOLD: 40
+              timeout: 0
+              tabs:
+                Coverage: coverage.html
+                Test-report: testoutput/test_report.xml
+              artifacts:
+                - build:
+                    source: app-source/coverage.html
+                    destination: ""
+                - test:
+                    source: app-source/test_report.xml
+                    destination: testoutput
+              tasks:
+                - exec:
+                    arguments:
+                      - test
+                    command: make
+                    run_if: passed
+                    working_directory: app-source
+                - exec:
+                    arguments:
+                      - coverage
+                    command: make
+                    run_if: passed
+                    working_directory: app-source
+                - exec:
+                    command: ls
+                    arguments:
+                      - ..
+                - exec:
+                    command: pwd
+                - exec:
+                    arguments:
+                      - check-threshold
+                    command: make
+                    run_if: passed
+                    working_directory: app-source
+                - exec:
+                    command: ls
+                    run_if: passed
+                - exec:
+                    command: pwd
+                    run_if: passed
+      - Build-image:
+          fetch_materials: false
+          keep_artifacts: false
+          clean_workspace: false
+          approval:
+            type: success
+            allow_only_on_success: true
+          jobs:
+            defaultJob:
+              # environment_variables:
+              # DOCKERHUB_USERNAME: toanshipit
+              # APP_NAME: go-api-app
+              timeout: 0
+              artifacts:
+                - external:
+                    id: go-api-app
+                    store_id: DockerHub
+                    configuration:
+                      options:
+                        Image: ${DOCKERHUB_USERNAME}/${APP_NAME}
+                        Tag: ${GO_PIPELINE_COUNTER}-${GO_REVISION_GIT_46F3484}
+              tasks:
+                - exec:
+                    arguments:
+                      - .
+                    command: ls
+                    run_if: passed
+                    working_directory: app-source
+                - exec:
+                    arguments:
+                      - build-image
+                    command: make
+                    run_if: passed
+                    working_directory: app-source
+      - Clean-up:
+          fetch_materials: true
+          keep_artifacts: false
+          clean_workspace: true
+          approval:
+            type: success
+            allow_only_on_success: true
+          jobs:
+            defaultJob:
+              timeout: 0
+              tasks:
+                - exec:
+                    arguments:
+                      - cleanup
+                    command: make
+                    run_if: passed
+                    working_directory: app-source
