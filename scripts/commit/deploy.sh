@@ -26,8 +26,7 @@ echo "Namespace: ${NAMESPACE}"
 helm upgrade --install "${RELEASE_NAME}" "${HELM_CHART_DIR}" \
   -n "${NAMESPACE}" --create-namespace \
   --set mongo.uri="mongodb://${DB_HOST}:${DB_PORT}" \
-  --set image.tag="${IMAGE_TAG}" \
-  --set image.repository="${DOCKERHUB_USERNAME}/${APP_NAME}"
+  --set image.artifact_image="${ARTIFACT_IMAGE}" \
 
 echo "Deployment completed with tag: ${IMAGE_TAG}"
 

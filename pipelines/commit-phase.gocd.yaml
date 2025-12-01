@@ -164,3 +164,20 @@ pipelines:
                   command: make
                   run_if: passed
                   working_directory: app-source
+    - Clean-up:
+        fetch_materials: false
+        keep_artifacts: false
+        clean_workspace: true
+        approval:
+          type: success
+          allow_only_on_success: true
+        jobs:
+          defaultJob:
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - cleanup
+                command: make
+                run_if: passed
+                working_directory: app-source
