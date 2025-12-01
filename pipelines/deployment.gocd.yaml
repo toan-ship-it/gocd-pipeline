@@ -59,7 +59,6 @@ pipelines:
                 arguments:
                 - deploy
                 working_directory: app-source
-                run_if: passed
             - exec:
                 command: ls
                 arguments:
