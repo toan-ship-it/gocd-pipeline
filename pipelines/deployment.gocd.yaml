@@ -52,7 +52,7 @@ pipelines:
                 pipeline: Build-Test-Report
                 stage: Build-image
                 job: defaultJob
-                artifact_id: ${DOCKERHUB_USERNAME}/${APP_NAME}:${GO_DEPENDENCY_LABEL_BUILDTESTREPORT}-${GO_REVISION_GIT_46F3484}
+                artifact_id: go-api-app
             - exec:
                 run_if: passed
                 command: make
