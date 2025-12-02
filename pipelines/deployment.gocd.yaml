@@ -16,7 +16,7 @@ pipelines:
         ignore_for_scheduling: true
       git-46f3484:
         git: https://github.com/toan-ship-it/go-api.git
-        username: toan-ship-it
+        username: toan
         ignore:
           - README.md
         shallow_clone: false
@@ -26,7 +26,7 @@ pipelines:
         destination: app-source
       pipeline-repo:
         git: https://github.com/toan-ship-it/gocd-pipeline.git
-        username: toan-ship-it
+        username: toan
         includes:
           - dummy-file-to-prevent-triggering.txt
         shallow_clone: false
