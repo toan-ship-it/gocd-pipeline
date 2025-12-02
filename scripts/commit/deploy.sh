@@ -7,6 +7,7 @@ BUILD_COUNT=${GO_DEPENDENCY_LABEL_BUILDTESTREPORT}
 REVISION=${GO_REVISION_GIT_46F3484}
 DB_HOST="172.19.93.189"
 DB_PORT="27017"
+IMAGE=${DOCKERHUB_USERNAME}/${APP_NAME}
 
 # --- Compute image tag ---
 IMAGE_TAG="${BUILD_COUNT}-${REVISION}"
@@ -26,7 +27,7 @@ echo "Namespace: ${NAMESPACE}"
 helm upgrade --install "${RELEASE_NAME}" "${HELM_CHART_DIR}" \
   -n "${NAMESPACE}" --create-namespace \
   --set mongo.uri="mongodb://${DB_HOST}:${DB_PORT}" \
-  --set image.artifact_image="${ARTIFACT_IMAGE}" \
+  --set image.artifact_image="${IMAGE}:${IMAGE_TAG}" \
   --set imagePullSecrets[0].name=dockerhub-auth \
 
 echo "Deployment completed with tag: ${IMAGE_TAG}"
