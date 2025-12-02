@@ -20,7 +20,7 @@ pipelines:
     materials:
       git-46f3484:
         git: https://github.com/toan-ship-it/go-api.git
-        username: toan
+        username: toan-ship-it
         ignore:
           - README.md
         shallow_clone: false
@@ -30,7 +30,7 @@ pipelines:
         destination: app-source
       pipeline-repo:
         git: https://github.com/toan-ship-it/gocd-pipeline.git
-        username: toan
+        username: toan-ship-it
         # ignore:
         # - README.md
         includes:
