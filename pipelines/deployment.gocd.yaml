@@ -2,13 +2,13 @@ format_version: 10
 environments:
   Test-pipelines:
     pipelines:
-    - Deploy
+      - Deploy
 pipelines:
   Deploy:
     group: defaultGroup
     label_template: ${COUNT}
     lock_behavior: none
-    display_order: -1    
+    display_order: -1
     materials:
       BuildTestReport:
         pipeline: Build-Test-Report
@@ -16,50 +16,50 @@ pipelines:
         ignore_for_scheduling: true
       git-46f3484:
         git: https://github.com/toan-ship-it/go-api.git
-        username: toan
+        username: '{{SECRET:[github-auth-1][github-username]}}'
         ignore:
-        - README.md
+          - README.md
         shallow_clone: false
         auto_update: true
         branch: main
-        encrypted_password: AES:yfl+xwkiz0b0ZWJMWaZMFA==:0yLp66+ld10CfypZenOC4YasUJ+8GTAJ4flSnCwQlILMqezO1niVhy1RQ4D9FK9l
+        encrypted_password: '{{SECRET:[github-auth-1][github-PAT]}}'
         destination: app-source
       pipeline-repo:
         git: https://github.com/toan-ship-it/gocd-pipeline.git
-        username: toan
+        username: '{{SECRET:[github-auth-1][github-username]}}'
         includes:
-        - dummy-file-to-prevent-triggering.txt
+          - dummy-file-to-prevent-triggering.txt
         shallow_clone: false
         auto_update: true
         branch: main
-        encrypted_password: AES:xYCp4yxJ8uFDE1lvxKgHdg==:6PQkqIcnKsOvPbRvzLTP38ZSkuSSeple4GeV6OPxxesB5IK/a8dVU3jvRhwaKe+c
+        encrypted_password: '{{SECRET:[github-auth-1][github-PAT]}}'
         destination: pipeline
     stages:
-    - Deploy:
-        fetch_materials: true
-        keep_artifact: false
-        clean_workspace: true
-        approval:
-          type: manual
-          allow_only_on_success: true
-        jobs:
-          deploy_app:
-            tasks:
-            # Task để chạy lệnh 'make deploy'
-            - fetch:
-                run_if: passed
-                artifact_origin: external
-                pipeline: Build-Test-Report
-                stage: Build-image
-                job: defaultJob
-                artifact_id: go-api-app
-            - exec:
-                run_if: passed
-                command: make
-                arguments:
-                - deploy
-                working_directory: app-source
-            - exec:
-                command: ls
-                arguments:
-                - .
+      - Deploy:
+          fetch_materials: true
+          keep_artifact: false
+          clean_workspace: true
+          approval:
+            type: manual
+            allow_only_on_success: true
+          jobs:
+            deploy_app:
+              tasks:
+                # Task để chạy lệnh 'make deploy'
+                # - fetch:
+                #     run_if: passed
+                #     artifact_origin: external
+                #     pipeline: Build-Test-Report
+                #     stage: Build-image
+                #     job: defaultJob
+                #     artifact_id: go-api-app
+                - exec:
+                    run_if: passed
+                    command: make
+                    arguments:
+                      - deploy
+                    working_directory: app-source
+                - exec:
+                    command: ls
+                    arguments:
+                      - .

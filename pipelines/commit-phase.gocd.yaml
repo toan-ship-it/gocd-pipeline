@@ -20,17 +20,17 @@ pipelines:
     materials:
       git-46f3484:
         git: https://github.com/toan-ship-it/go-api.git
-        username: toan
+        username: '{{SECRET:[github-auth-1][github-username]}}'
         ignore:
           - README.md
         shallow_clone: false
         auto_update: true
         branch: main
-        encrypted_password: AES:yfl+xwkiz0b0ZWJMWaZMFA==:0yLp66+ld10CfypZenOC4YasUJ+8GTAJ4flSnCwQlILMqezO1niVhy1RQ4D9FK9l
+        encrypted_password: '{{SECRET:[github-auth-1][github-PAT]}}'
         destination: app-source
       pipeline-repo:
         git: https://github.com/toan-ship-it/gocd-pipeline.git
-        username: toan
+        username: '{{SECRET:[github-auth-1][github-username]}}'
         # ignore:
         # - README.md
         includes:
@@ -38,7 +38,7 @@ pipelines:
         shallow_clone: false
         auto_update: true # false to pipeline not run when update pipeline definition repo
         branch: main
-        encrypted_password: AES:xYCp4yxJ8uFDE1lvxKgHdg==:6PQkqIcnKsOvPbRvzLTP38ZSkuSSeple4GeV6OPxxesB5IK/a8dVU3jvRhwaKe+c
+        encrypted_password: '{{SECRET:[github-auth-1][github-PAT]}}'
         destination: pipeline
     stages:
       - Build:
