@@ -27,6 +27,7 @@ helm upgrade --install "${RELEASE_NAME}" "${HELM_CHART_DIR}" \
   -n "${NAMESPACE}" --create-namespace \
   --set mongo.uri="mongodb://${DB_HOST}:${DB_PORT}" \
   --set image.artifact_image="${ARTIFACT_IMAGE}" \
+  --set imagePullSecrets[0].name=dockerhub-auth \
 
 echo "Deployment completed with tag: ${IMAGE_TAG}"
 
