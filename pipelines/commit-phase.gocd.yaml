@@ -26,7 +26,7 @@ pipelines:
         shallow_clone: false
         auto_update: true
         branch: main
-        encrypted_password: "{{SECRET:[github-auth-1][github-PAT]}}"
+        encrypted_password: AES:TrdXHWrLLD19QNchpCIsow==:hRtl5k2lPRqaZNJ5/jTpbAGyYoMllm49T24spEV+gDfp96fWVyN430cTO+zyVMEz
         destination: app-source
       pipeline-repo:
         git: https://github.com/toan-ship-it/gocd-pipeline.git
@@ -38,7 +38,7 @@ pipelines:
         shallow_clone: false
         auto_update: true # false to pipeline not run when update pipeline definition repo
         branch: main
-        encrypted_password: "{{SECRET:[github-auth-1][github-PAT]}}"
+        encrypted_password: AES:TrdXHWrLLD19QNchpCIsow==:hRtl5k2lPRqaZNJ5/jTpbAGyYoMllm49T24spEV+gDfp96fWVyN430cTO+zyVMEz
         destination: pipeline
     stages:
       - Build:
